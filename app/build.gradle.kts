@@ -9,11 +9,17 @@ android {
 
     defaultConfig {
         applicationId = "com.hypermagik.spectrum"
-        minSdk = 28
+        minSdk = 21          // Android 5.0 – required for Note 3
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        // Important for vector drawables on old devices
+        vectorDrawables.useSupportLibrary = true
     }
+
+    // your existing signingConfigs / buildTypes / buildFeatures can stay
+}
 
     signingConfigs {
         create("spectrum") {
@@ -43,9 +49,16 @@ android {
 }
 
 dependencies {
+    // Core + UI
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.material)
+    implementation(libs.androidx.appcompat)        // AppCompatActivity, ActionBar, etc.
+    implementation(libs.androidx.constraintlayout) // ConstraintLayout
+    implementation(libs.material)                  // Material components (Buttons, Cards, TextInput, etc.)
+
+    // Often useful
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.2")
+
     implementation(project(":lib"))
 }
